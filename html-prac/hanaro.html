@@ -1,40 +1,195 @@
 <!DOCTYPE html>
-<html lanng="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Bootstrap Example</title>
-    <meta name=" viewpoint" content="width=device-width", initial-scale="1">
-    <link href= "https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-<body>
-    <div class="container mt-3">
-        <h1>Hello my name is Young Hun !</h1>
-        <p class="text-danger">my name is Young Hun !</p>
-        <p class="text-warning">my name is Young Hun !</p>
-        <p class="text-success">my name is Young Hun !</p>
-        <p class="text-info">my name is Young Hun !</p>
-        <p class="text-primary">my name is Young Hun !</p>
-        <p class="text-dark">my name is Young Hun !</p>
-    </div>
-    <div class="container mt-3">
-        <h1>쓰시오.</h1>
-        
-        <div class="input-group mb-3">
-            <button class="btn btn-outline-dark" type="button">ㅋㅋㅋ</button>
-            <input type = "text" class="from-control" placeholder="여기에 입력하시오">
-        </div>
+    <link rel="stylesheet" href="board_styles.css" />
+    <style>
+      .hidden {
+        display: none;
+      }
 
-        <div class="input-group mb-3">
-            <input type = "text" class="from-control" placeholder="여긴 검색하시오">
-            <button class="btn btn-outline-success" type="submit">ㅎㅎㅎ</button>
+      a:hover {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 내브바 -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#" onclick="showListSection()">게시판</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" onclick="showListSection()">목록</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" onclick="showWriteSection()">글 작성</a>
+            </li>
+          </ul>
         </div>
-
-        <div class="input-group mb-3">
-            <input type = "text" class="from-control" placeholder="무엇을 입력해야할까 ...">
-            <button class="btn btn-outline-dark" type="button">어쩔</button>
-            <button class="btn btn-outline-dark" type="button">티비</button>
+      </div>
+    </nav>
+    <div class="board-container">
+      <!-- 게시판 목록 (List) -->
+      <div id="list-section">
+        <h1 class="text-center mt-3">게시판 목록</h1>
+        <ul class="list-group" id="post-list">
+          <!-- 게시글 항목들이 여기에 추가됩니다. -->
+        </ul>
+      </div>
+      <!-- 게시글 보기 (View) -->
+      <div id="view-section" class="hidden"></div>
+      <!-- 게시글 작성 (Write) -->
+      <div id="write-section" class="hidden">
+        <h1 class="text-center mt-3">글 작성</h1>
+        <button
+          id="modal-button"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+        >
+          Add Board
+        </button>
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">글 작성</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <form id="post-form">
+                  <div class="mb-3">
+                    <label for="board-title" class="col-form-label">제목</label>
+                    <input type="text" class="form-control" id="board-title" />
+                  </div>
+                  <div class="mb-3">
+                    <label for="content-text" class="col-form-label"
+                      >내용</label
+                    >
+                    <textarea class="form-control" id="content-text"></textarea>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="save-button">
+                  작성
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  취소
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-</body>
+
+    <!-- JavaScript -->
+    <script>
+      let posts = [
+        { title: "첫 번째 게시글", content: "첫 번째 게시글의 내용입니다." },
+        { title: "두 번째 게시글", content: "두 번째 게시글의 내용입니다." },
+        { title: "세 번째 게시글", content: "세 번째 게시글의 내용입니다." },
+        { title: "네 번째 게시글", content: "네 번째 게시글의 내용입니다." },
+      ];
+      const postListElement = document.getElementById("post-list");
+
+      function showListSection() {
+        document.getElementById("list-section").classList.remove("hidden");
+        document.getElementById("view-section").classList.add("hidden");
+        document.getElementById("write-section").classList.add("hidden");
+        renderPostList();
+      }
+
+      function showViewSection(index) {
+        document.getElementById("list-section").classList.add("hidden");
+        document.getElementById("view-section").classList.remove("hidden");
+        document.getElementById("write-section").classList.add("hidden");
+        const post = posts[index];
+        const postDetailElement = document.getElementById("view-section");
+        postDetailElement.innerHTML = `
+            <h4>${post.title}</h4>
+            <p>${post.content}</p>
+        `;
+      }
+
+      function showWriteSection() {
+        document.getElementById("list-section").classList.add("hidden");
+        document.getElementById("view-section").classList.add("hidden");
+        document.getElementById("write-section").classList.remove("hidden");
+      }
+
+      function renderPostList() {
+        postListElement.innerHTML = "";
+        posts.forEach((post, index) => {
+          const listItem = document.createElement("li");
+          listItem.className =
+            "list-group-item d-flex justify-content-between align-items-center";
+          listItem.innerHTML = `
+            ${post.title}
+            <button class="btn btn-info btn-sm" onclick="showViewSection(${index})">View</button>
+          `;
+          postListElement.appendChild(listItem);
+        });
+      }
+
+      document
+        .getElementById("save-button")
+        .addEventListener("click", function () {
+          const title = document.getElementById("board-title").value;
+          const content = document.getElementById("content-text").value;
+
+          if (title && content) {
+            posts.push({ title, content });
+            renderPostList();
+
+            // Clear the form fields
+            document.getElementById("board-title").value = "";
+            document.getElementById("content-text").value = "";
+
+            // Hide the modal
+            const modalElement = document.getElementById("exampleModal");
+            const modal = bootstrap.Modal.getInstance(modalElement); // Get modal instance
+            modal.hide(); // Hide the modal
+          }
+        });
+
+      showListSection();
+    </script>
+  </body>
 </html>
