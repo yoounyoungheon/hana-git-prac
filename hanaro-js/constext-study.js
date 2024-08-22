@@ -10,7 +10,7 @@ function f1(x,y){
     f2('first');
     {
         const xx=99;
-        f2('nest-first');
+        f2('nest-first'); // nested f2()실행
         var zz=88;
         function f2(t){console.log(t, 'nested', xx, zz)} // lll 에러
         let lll=0; // f2메서드가 올라간 후 lll 선언 -> not initialize
@@ -18,10 +18,10 @@ function f1(x,y){
     function f2(t,u){console.log(t,'inner', xx, zz)}
     function f2(t,u,v){console.log(t,'inner2', xx, zz)}
     var zz=800;
-    f2('second'); // block scope안 f2() 실행 -> nested
+    f2('second'); // block scope안 f2() 실행 -> nested?outerEnvReference ?
 }
 
-function f2(g){ console.log(g, 'global f2', gg, bb, xx, kk) }
+function f2(g){ console.log(g, 'global f2', gg, bb, xx, kk) };
 
 let xx = 9;
 if(gg>0){var kk =33; const yy=9;} // gg: 1
