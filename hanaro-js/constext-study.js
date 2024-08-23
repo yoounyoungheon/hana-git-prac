@@ -1,8 +1,3 @@
-/*
-hoisting
-var gg; var bb; let xx;
-*/
-
 var gg =1; let bb=2;
 
 function f1(x,y){
@@ -19,7 +14,7 @@ function f1(x,y){
     function f2(t,u){console.log(t,'inner', xx, zz)}
     function f2(t,u,v){console.log(t,'inner2', xx, zz)}
     var zz=800;
-    f2('second'); // block scope안 f2() 실행
+    f2('second'); // block scope안 f2() 실행, f1 실행 단계에서 {}(블럭)을 만나면 {}평가(hoisting) 시작
 }
 
 function f2(g){ console.log(g, 'global f2', gg, bb, xx, kk) };
