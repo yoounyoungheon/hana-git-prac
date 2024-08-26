@@ -51,3 +51,4 @@ const obj2 = {
 
 const printName = obj2.printName;
 printName();
+
