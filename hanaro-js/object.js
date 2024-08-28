@@ -71,16 +71,36 @@
 // queue.shift();
 // console.log(queue);
 
-const arr = [1,2,3,4,5];
-console.log(arr.slice(1,3))
-console.log(arr.slice(2,))
-arr.splice(1,3);
-arr.splice(1,0,2,3,4);
-console.log(arr)
-arr.splice(2,)
-console.log(arr);
-arr.push(3,4,5)
-// arr.splice(2, 0, 'X', 'Y', 'Z');
-console.log(arr)
-const arr6 = [...arr.slice(0,2),'X','Y','Z',...arr.slice(2,)]
-console.log(arr6)
+// const arr = [1,2,3,4,5];
+// console.log(arr.slice(1,3))
+// console.log(arr.slice(2,))
+// arr.splice(1,3);
+// arr.splice(1,0,2,3,4);
+// console.log(arr)
+// arr.splice(2,)
+// console.log(arr);
+// arr.push(3,4,5)
+// // arr.splice(2, 0, 'X', 'Y', 'Z');
+// console.log(arr)
+// const arr6 = [...arr.slice(0,2),'X','Y','Z',...arr.slice(2,)]
+// console.log(arr6)
+
+function push(arr, ...args){
+    const newArr = [...arr, args].flat();
+    return newArr;
+};
+
+function pop(arr, index=1){
+    const newArr = arr.slice(0,-index)
+    return newArr;
+};
+
+function shift(arr, ...args){
+    const newArr = [...args, arr].flat()
+    return newArr;
+};
+
+function unshift(arr, index=1){
+    const newArr = arr.slice(index, )
+    return newArr;
+};
