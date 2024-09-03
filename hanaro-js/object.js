@@ -310,52 +310,51 @@
 // 3. OOP와 FP를 혼합한 예시를 생각해보자
 // 4. 예시를 직접 코드로 작성해보자
 
-class Person{
-    #name;
-    #words = [];
-    constructor(){}
+// class Person{
+//     #name;
+//     #words = [];
+//     constructor(){}
 
-    setName(name){this.#name = name};
-    setWords(words){this.#words.push(words)};
+//     setName(name){this.#name = name};
+//     setWords(words){this.#words.push(words)};
 
-    greet(){
-        return `${this.#name}이야 ~!`;
-    };
+//     greet(){
+//         return `${this.#name}이야 ~!`;
+//     };
 
-    getGreetWords(){
-        return this.#words;
-    }
+//     getGreetWords(){
+//         return this.#words;
+//     }
 
-    convertArraytoString(arr){
-        const str = arr.join(' ');
-        return str;
-    }
+//     convertArraytoString(arr){
+//         const str = arr.join(' ');
+//         return str;
+//     }
 
-    speak(){
-        const wordsLst = this.getGreetWords().flat()
-        const words = this.convertArraytoString(wordsLst);
-        const introduceWord = this.greet();
-        console.log(words, introduceWord);
-    }
-}
+//     speak(){
+//         const wordsLst = this.getGreetWords().flat()
+//         const words = this.convertArraytoString(wordsLst);
+//         const introduceWord = this.greet();
+//         console.log(words, introduceWord);
+//     }
+// }
 
-const yh = new Person();
-yh.setName('영헌')
-yh.setWords(['너무 너무','반가워','안녕!','나는'])
-yh.speak();
+// const yh = new Person();
+// yh.setName('영헌')
+// yh.setWords(['너무 너무','반가워','안녕!','나는'])
+// yh.speak();
 
-class Student extends Person{
-    constructor(){super()}
-    study(){console.log('학생은 공부한다.')}
-}
-const playMixin = {
-    play(){console.log("그렇지만 놀기도 해야한다.")}
-}
-Object.assign(Student.prototype, playMixin);
+// class Student extends Person{
+//     constructor(){super()}
+//     study(){console.log('학생은 공부한다.')}
+// }
+// const playMixin = {
+//     play(){console.log("그렇지만 놀기도 해야한다.")}
+// }
+// Object.assign(Student.prototype, playMixin);
 
-const studyYh = new Student();
-studyYh.setName('공부하는 영헌')
-studyYh.setWords(['안녕~!','너무 너무 반기워','~','나는'])
-studyYh.study();
-studyYh.play();
-
+// const studyYh = new Student();
+// studyYh.setName('공부하는 영헌')
+// studyYh.setWords(['안녕~!','너무 너무 반기워','~','나는'])
+// studyYh.study();
+// studyYh.play();
