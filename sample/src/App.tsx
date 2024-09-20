@@ -1,5 +1,6 @@
 import './App.css'
 import Checkbox from './CheckBox';
+import DarkAndLight from './DarkAndLight';
 import DecreaseButton from './DecreaseButton'
 import TextInput from './TextInput';
 import ToDoList from './ToDoList';
@@ -14,6 +15,7 @@ function App() {
       <Checkbox/>
       <TextInput/>
       <ToDoList/>
+      <DarkAndLight/>
     </>
   )
 }
