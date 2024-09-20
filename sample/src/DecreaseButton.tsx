@@ -5,7 +5,6 @@ function DecreaseButton(){
   const [count, setCount] = useState(50)
 
   return (
-    
     <div className="card">
     <p>count is {count}</p>
     <button onClick={() => setCount((count) => count + 1)}>up</button>
