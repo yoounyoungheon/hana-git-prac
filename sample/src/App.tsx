@@ -2,6 +2,9 @@ import { useState } from "react";
 import My from "./components/My";
 import "./App.css";
 import { Session } from "./utils/type";
+import FocusInput from "./components/FocusInput";
+import ClickCounter from "./components/ClickCount";
+import PreventTyping from "./components/PreventTyping";
 
 const SampleSession: Session = {
   loginUser: { id: 1, name: "영헌"},
@@ -37,8 +40,13 @@ function App() {
   }
 
   return (
+    <div>
     <div className="app-container">
       <My session={session} logout={logout} login={login} removeCartItem={removeCartItem}></My>
+    </div>
+    <FocusInput/>
+    <ClickCounter/>
+    <PreventTyping/>
     </div>
   );
 }
