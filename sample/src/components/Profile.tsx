@@ -10,13 +10,14 @@ interface ProfileProps {
     return (
       <div className="profile-container">
         <h1>
-          Hello, {user.name}! <span className="age">({user.age})</span>
+          Hello, {user.name}! <span className="age"></span>
         </h1>
         <span className="user-name">
-          {user.name} <span className="status">logined</span>
+          logined
         </span>
+        <div> </div> 
         <button onClick={logout} className="logout-button">
-          SignOut
+        SignOut
         </button>
       </div>
     );

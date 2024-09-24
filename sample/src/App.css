@@ -13,17 +13,14 @@ h2 {
 }
 
 button {
-  padding: 8px 16px;
-  background-color: #007bff;
-  color: white;
+  color: #007bff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: #0056b3;
+  color: #001934;
 }
 
 /* app 전체 */
@@ -86,7 +83,7 @@ button:hover {
 }
 
 .login-title {
-  color: green;
+  color: black;
   text-align: center;
   margin-bottom: 40px; /* 하단 여백 증가 */
   font-size: 32px; /* 폰트 크기 증가 */
@@ -118,7 +115,7 @@ label {
 }
 
 .login-button {
-  background-color: #28a745;
+  background-color: #007bff;
   padding: 15px;
   font-size: 18px; /* 버튼 크기 증가 */
   border-radius: 4px;
@@ -126,7 +123,7 @@ label {
 }
 
 .login-button:hover {
-  background-color: #218838;
+  background-color: #007bff;
 }
 /* Cart List */
 .cart-list {
@@ -138,6 +135,7 @@ label {
 .cart-item {
   padding: 20px; /* 카드 아이템 크기 증가 */
   background-color: #f4f4f4;
+  text-align: center;
   border: 1px solid #ccc;
   border-radius: 8px;
   margin-bottom: 15px;
