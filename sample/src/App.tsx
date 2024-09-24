@@ -1,15 +1,12 @@
 import { useState } from "react";
-import My from "./components/SPAPractice/My";
+import My from "./components/spa-practice/My";
 import "./App.css";
-import { Session } from "./utils/type";
+import { CartItem, Session } from "./utils/type";
+import ParentButton from "./components/use-ref-hook-practice/ParentChildButton";
 
 const SampleSession: Session = {
   loginUser: { id: 1, name: "영헌"},
-  cart:[
-    { id: 100, name: "라면", price: 3000 },
-    { id: 101, name: "컵라면", price: 2000 },
-    { id: 200, name: "파", price: 5000 },
-  ],
+  cart:[],
 };
 
 function App() {
@@ -36,12 +33,27 @@ function App() {
     })
   }
 
+  const addCartItem = (name: string, price: number) => {
+    const newItem: CartItem = {
+      id: session.cart.length + 1,
+      name,
+      price,
+    };
+
+    setSession({
+      ...session,
+      cart: [...session.cart, newItem],
+    });
+  };
+
   return (
     <div>
     <div className="app-container">
-      <My session={session} logout={logout} login={login} removeCartItem={removeCartItem}></My>
+      <My session={session} logout={logout} login={login} removeCartItem={removeCartItem} addCartItem={addCartItem}></My>
     </div>
+    <ParentButton/>
     </div>
+    
   );
 }
 
