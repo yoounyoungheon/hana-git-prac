@@ -1,4 +1,4 @@
-import { User } from "../utils/type";
+import { User } from "../../utils/type";
 
   
 interface ProfileProps {
