@@ -3,6 +3,14 @@ import My from "./components/spa-practice/My";
 import "./App.css";
 import { CartItem, Session } from "./utils/type";
 import ParentButton from "./components/use-ref-hook-practice/ParentChildButton";
+import { ParentInput } from "./components/use-ref-hook-practice/ParentInput";
+import { CustomModal } from "./components/use-ref-hook-practice/CustomModal";
+import { CustomVideoPlayer } from "./components/use-ref-hook-practice/CustomVideoPalyer";
+import { CustomTextArea } from "./components/use-ref-hook-practice/CustomTextAreat";
+import { ChangeThemeButton } from "./components/context/TransDark";
+
+
+
 
 const SampleSession: Session = {
   loginUser: { id: 1, name: "영헌"},
@@ -52,6 +60,11 @@ function App() {
       <My session={session} logout={logout} login={login} removeCartItem={removeCartItem} addCartItem={addCartItem}></My>
     </div>
     <ParentButton/>
+    <ParentInput/>
+    <CustomTextArea/>
+    <CustomModal/>
+    <CustomVideoPlayer/>
+    <ChangeThemeButton/>
     </div>
     
   );

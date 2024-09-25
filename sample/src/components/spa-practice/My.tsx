@@ -31,8 +31,9 @@ const My: React.FC<MyProps> = ({ session, logout, login, removeCartItem, addCart
         ? (<Profile user={session.loginUser} logout={logout} />)
         : (<Login login={login} />)
       }
-
+      
       <ul className="cart-list">
+      <h2>My-To-DoList</h2>
         {session.cart.map((item) => (
           <li key={item.id} className="cart-item">
             {item.name} : {item.price.toLocaleString()} 시간
