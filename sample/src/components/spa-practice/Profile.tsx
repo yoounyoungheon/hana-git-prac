@@ -1,16 +1,12 @@
-import { User } from "../../utils/type";
+import { useSession } from "./SessionContext";
 
-  
-interface ProfileProps {
-    user: User;
-    logout: () => void;
-  }
-  
-  const Profile: React.FC<ProfileProps> = ({ user, logout }) => {
-    return (
+const Profile: React.FC = () => {
+  const { session, logout} = useSession();
+  const { loginUser } = session;
+  return (
       <div className="profile-container">
         <h1>
-          Hello, {user.name}! <span className="age"></span>
+          Hello, {loginUser?.name}! <span className="age"></span>
         </h1>
         <span className="user-name">
           logined

@@ -6,7 +6,7 @@ export type LoginUser = {
 export type Cart = {
   id: number;
   name: string;
-  price: number
+  hour: number
 }; 
 
 export type Session = {
@@ -23,5 +23,5 @@ export type User = {
 export type CartItem = {
   id: number;
   name: string;
-  price: number;
+  hour: number;
 }

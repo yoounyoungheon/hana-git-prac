@@ -1,50 +1,53 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import Login from "./Login";
 import Profile from "./Profile";
-import { Session } from "../../utils/type";
+import { useSession } from "./SessionContext";
 
-interface MyProps {
-  session: Session;
-  logout: () => void;
-  login: (id: number, name: string) => void;
-  removeCartItem: (itemId: number) => void;
-  addCartItem: (name:string, practice:number) => void;
-}
+const My: React.FC = () => {
+  const { session, addCartItem, removeCartItem } = useSession();
+  const { loginUser, cart } = session;
 
-const My: React.FC<MyProps> = ({ session, logout, login, removeCartItem, addCartItem }) => {
-  const nameRef = useRef<HTMLInputElement>(null);
-  const priceRef = useRef<HTMLInputElement>(null);
-  const handleAddItem = ()=>{
-    const name = nameRef.current?.value;
-    const price = priceRef.current?.value;
-
-    if(name && price){
-      addCartItem(name, parseFloat(price));
-      nameRef.current.value = "";
-      priceRef.current.value = "";
+  const [newItemName, setNewItemName] = useState("");
+  const [newItemPrice, setNewItemPrice] = useState<number | "">("");
+  
+  const handleAddItem = () => {
+    if (newItemName && newItemPrice) {
+      addCartItem(newItemName, Number(newItemPrice));
+      setNewItemName("");
+      setNewItemPrice("");
     }
-  }
+  };
+
   return (
     <div className="my-container">
-      {
-        session.loginUser
-        ? (<Profile user={session.loginUser} logout={logout} />)
-        : (<Login login={login} />)
-      }
+      {loginUser ? <Profile /> : <Login />}
       
       <ul className="cart-list">
       <h2>My-To-DoList</h2>
-        {session.cart.map((item) => (
+        {cart.map((item) => (
           <li key={item.id} className="cart-item">
-            {item.name} : {item.price.toLocaleString()} 시간
+            {item.name} : {item.hour.toLocaleString()} 시간
             <div></div>
             <button onClick={()=>removeCartItem(item.id)}> delete </button>
           </li>
         ))}
       </ul>
-      <input type="text" placeholder="To-Do" ref={nameRef} />
-      <input type="number" placeholder="How Long ?" ref={priceRef} />
-      <button onClick={handleAddItem}> Add </button>
+
+      <div className="add-item-form">
+        <input
+          type="text"
+          placeholder="Item Name"
+          value={newItemName}
+          onChange={(e) => setNewItemName(e.target.value)}
+        />
+        <input
+          type="number"
+          placeholder="Item Price"
+          value={newItemPrice}
+          onChange={(e) => setNewItemPrice(Number(e.target.value))}
+        />
+        <button onClick={handleAddItem}>Add Item</button>
+      </div>
     </div>
   );
 };
