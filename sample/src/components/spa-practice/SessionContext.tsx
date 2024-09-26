@@ -10,17 +10,25 @@ interface SessionContextType {
   removeCartItem: (itemId: number) => void;
 }
 
-export const SessionContext = createContext<SessionContextType | undefined>(undefined);
+const SessionContext = createContext<SessionContextType | undefined>(undefined);
 
 export const useSession = () => {
   const context = useContext(SessionContext);
+  if (!context) {
+    throw new Error("useSession must be used within a SessionProvider");
+  }
+  return context;
+};
 
+export const SessionProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
   const [session, setSession] = useState<Session>({
-    loginUser:{ id: 1, name: "영헌"},
+    loginUser: null,
     cart: [
-      { id: 100, name: "TypeScript", hour: 3 },
-      { id: 101, name: "React", hour: 2 },
-      { id: 200, name: "Next", hour: 5 },
+      { id: 100, name: "TypeScript", hour: 3000 },
+      { id: 101, name: "React", hour: 2000 },
+      { id: 200, name: "Next JS", hour: 5000 },
     ],
   });
 
@@ -56,16 +64,6 @@ export const useSession = () => {
       cart: session.cart.filter((item) => item.id !== itemId),
     });
   };
-  if (!context) {
-    throw new Error("useSession must be used within a SessionProvider");
-  }
-  return {context, session, login, logout, addCartItem, removeCartItem};
-};
-
-export const SessionProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
-  const {session, login, logout, addCartItem, removeCartItem} = useSession();
 
   return (
     <SessionContext.Provider
