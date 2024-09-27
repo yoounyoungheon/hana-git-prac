@@ -26,9 +26,9 @@ export const SessionProvider: React.FC<{ children: ReactNode }> = ({
   const [session, setSession] = useState<Session>({
     loginUser: null,
     cart: [
-      { id: 100, name: "TypeScript", hour: 3000 },
-      { id: 101, name: "React", hour: 2000 },
-      { id: 200, name: "Next JS", hour: 5000 },
+      { id: 100, name: "TypeScript", hour: 2 },
+      { id: 101, name: "React", hour: 2 },
+      { id: 200, name: "Next JS", hour: 5 },
     ],
   });
 
