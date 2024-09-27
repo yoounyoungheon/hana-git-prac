@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import Login from "./Login";
 import Profile from "./Profile";
 import { useSession } from "./SessionContext";
@@ -63,6 +63,17 @@ const My: React.FC = () => {
     setHasDirty(true);
   };
 
+  const totalHour: number = useMemo(()=>{
+    const prices = cart.map((obj)=>{return obj.hour})
+    let sum = 0;
+    for(const price of prices){
+      sum+=price
+    }
+    return sum;
+  },[cart])
+
+  console.log(`total is ${totalHour}`);
+
   return (
     <div className="my-container">
       {loginUser ? <Profile /> : <Login />}
@@ -103,6 +114,7 @@ const My: React.FC = () => {
           </li>
         ))}
       </ul>
+      <h3>총 공부 시간: {totalHour}</h3>
 
       <div className="add-item-form">
         <input

@@ -7,24 +7,13 @@ import "./App.css";
 // import { CustomTextArea } from "./components/use-ref-hook-practice/CustomTextAreat";
 // import { ChangeThemeButton } from "./components/context/TransDark";
 import { SessionProvider } from "./components/spa-practice/SessionContext";
-import { AutoCounter } from "./components/use-effect-hook-practice/AutoCounter";
 
 function App() {
 
   return (
-    <div>
     <div className="app-container">
       <SessionProvider><My/></SessionProvider>
     </div>
-    {/* <ParentButton/>
-    <ParentInput/>
-    <CustomTextArea/>
-    <CustomModal/>
-    <CustomVideoPlayer/>
-    <ChangeThemeButton/> */}
-    <AutoCounter/>
-    </div>
-    
   );
 }
 
