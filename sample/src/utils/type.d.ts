@@ -14,12 +14,6 @@ export type Session = {
   cart: Cart[]; 
 };
 
-export type User = {
-  id: number;
-  name: string;
-  age?: number;
-}
-
 export type CartItem = {
   id: number;
   name: string;

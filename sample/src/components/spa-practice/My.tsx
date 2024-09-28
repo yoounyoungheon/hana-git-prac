@@ -7,6 +7,7 @@ const My: React.FC = () => {
   const { session, addCartItem, removeCartItem } = useSession();
   const { loginUser, cart } = session;
 
+  // 새로운 아이템의 상태
   const [newItemName, setNewItemName] = useState("");
   const [newItemPrice, setNewItemPrice] = useState<number | "">("");
 
