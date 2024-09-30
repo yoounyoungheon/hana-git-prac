@@ -1,10 +1,13 @@
-import React, { useMemo, useState } from "react";
+import React, { memo, useMemo, useState } from "react";
 import Login from "./Login";
 import Profile from "./Profile";
 import { useSession } from "./SessionContext";
+import { useDebounce } from "../../hooks/use-debounce-hook";
+
+const MemoziedLogin = memo(Login);
 
 const My: React.FC = () => {
-  const { session, addCartItem, removeCartItem } = useSession();
+  const { session, addCartItem, removeCartItem,login} = useSession();
   const { loginUser, cart } = session;
 
   // 새로운 아이템의 상태
@@ -16,6 +19,13 @@ const My: React.FC = () => {
   const [editedName, setEditedName] = useState("");
   const [editedPrice, setEditedPrice] = useState<number | "">("");
   const [hasDirty, setHasDirty] = useState(false); // 값이 변경되었는지 여부
+
+  // 검색어 상태
+  const [searchTerm, setSearchTerm] = useState("");
+  const debouncedSearchTerm  = useDebounce(searchTerm, 300);
+  // 검색된 상태 필터링
+  const filterCartItems = cart.filter((item)=>item.name.includes(debouncedSearchTerm));
+
 
   const handleAddItem = () => {
     if (newItemName && newItemPrice) {
@@ -64,6 +74,7 @@ const My: React.FC = () => {
     setHasDirty(true);
   };
 
+  // totalHour 캐싱
   const totalHour: number = useMemo(()=>{
     const prices = cart.map((obj)=>{return obj.hour})
     let sum = 0;
@@ -77,10 +88,18 @@ const My: React.FC = () => {
 
   return (
     <div className="my-container">
-      {loginUser ? <Profile /> : <Login />}
+      {loginUser ? <Profile /> : <MemoziedLogin login={login} />}
+
+      <input
+        type="text"
+        placeholder="Search Items"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="search-input"
+      />
 
       <ul className="cart-list">
-        {cart.map(({ id, name, hour }) => (
+        {filterCartItems.map(({ id, name, hour }) => (
           <li key={id} className="cart-item">
             {editingItemId === id ? (
               <>
@@ -124,6 +143,7 @@ const My: React.FC = () => {
           value={newItemName}
           onChange={(e) => handleInputChange(setNewItemName, e.target.value)}
         />
+
         <input
           type="number"
           placeholder="Item Price"

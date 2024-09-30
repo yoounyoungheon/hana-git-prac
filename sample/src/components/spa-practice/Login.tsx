@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { useSession } from "./SessionContext";
 
-const Login: React.FC= () => {
+
+interface LoginPropsType{login: (id:number, name:string)=>void}
+
+function Login({login}:LoginPropsType){
+  console.log('Rendered Login')
   const [id, setId] = useState<number | "">("");
   const [name, setName] = useState<string>("");
-  const {login} = useSession();
-
   
-
   const handleLogin = (event: React.FormEvent) => {
     event.preventDefault(); // 기본 클릭 방지
     if (id && name) {

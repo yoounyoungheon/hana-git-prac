@@ -1,5 +1,4 @@
 import My from "./components/spa-practice/My";
-import "./App.css";
 // import ParentButton from "./components/use-ref-hook-practice/ParentChildButton";
 // import { ParentInput } from "./components/use-ref-hook-practice/ParentInput";
 // import { CustomModal } from "./components/use-ref-hook-practice/CustomModal";

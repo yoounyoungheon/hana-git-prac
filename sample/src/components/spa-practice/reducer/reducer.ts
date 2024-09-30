@@ -6,7 +6,6 @@ type ActionType =
   | { type: "addCartItem"; payload: CartItem }
   | { type: "removeCartItem"; payload: number };
 
-
 export const initialSession: Session ={
   loginUser: null,
   cart: [
