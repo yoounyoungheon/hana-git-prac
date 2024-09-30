@@ -1,5 +1,6 @@
-import { useSession } from "./SessionContext";
+import { useSession
 
+ } from "../context-api/SessionContext";
 const Profile: React.FC = () => {
   const { session, logout} = useSession();
   const { loginUser } = session;
@@ -13,7 +14,7 @@ const Profile: React.FC = () => {
         </span>
         <div> </div> 
         <button onClick={logout} className="logout-button">
-        SignOut
+          SignOut
         </button>
       </div>
     );

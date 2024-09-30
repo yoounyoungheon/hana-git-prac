@@ -1,18 +1,27 @@
-import My from "./components/spa-practice/My";
-// import ParentButton from "./components/use-ref-hook-practice/ParentChildButton";
-// import { ParentInput } from "./components/use-ref-hook-practice/ParentInput";
-// import { CustomModal } from "./components/use-ref-hook-practice/CustomModal";
-// import { CustomVideoPlayer } from "./components/use-ref-hook-practice/CustomVideoPalyer";
-// import { CustomTextArea } from "./components/use-ref-hook-practice/CustomTextAreat";
-// import { ChangeThemeButton } from "./components/context/TransDark";
-import { SessionProvider } from "./components/spa-practice/SessionContext";
+import { Route, Routes } from 'react-router-dom';
+import './App.css';
+import { Home } from './components/routing/Home';
+import { Items } from './components/routing/Items';
+import Nav from './components/Nav';
+import { LoginWrapper } from './components/routing/LoginWrapper';
+import { SessionProvider } from './components/context-api/SessionContext';
+import { NotFoundPage } from './components/routing/NotFoundPage';
+import { My }from './components/routing/My';
+
 
 function App() {
 
   return (
-    <div className="app-container">
-      <SessionProvider><My/></SessionProvider>
-    </div>
+    <SessionProvider>
+    <Nav/>
+    <Routes>
+      <Route path='/' element={<Home></Home>}></Route>
+      <Route path='/login' element={<LoginWrapper/>}></Route>
+      <Route path='/my' element={<My/>}></Route>
+      <Route path='/items' element={<Items/>}></Route>
+      <Route path="*" element={<NotFoundPage />} />
+    </Routes>
+    </SessionProvider>
   );
 }
 

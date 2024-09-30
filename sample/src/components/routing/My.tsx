@@ -1,14 +1,11 @@
-import React, { memo, useMemo, useState } from "react";
-import Login from "./Login";
-import Profile from "./Profile";
-import { useSession } from "./SessionContext";
+import React, { useMemo, useState } from "react";
+import Profile from "./Profil";
+import { useSession } from "../context-api/SessionContext";
 import { useDebounce } from "../../hooks/use-debounce-hook";
 
-const MemoziedLogin = memo(Login);
-
-const My: React.FC = () => {
-  const { session, addCartItem, removeCartItem,login} = useSession();
-  const { loginUser, cart } = session;
+export const My: React.FC = () => {
+  const { session, addCartItem, removeCartItem} = useSession();
+  const { cart } = session;
 
   // 새로운 아이템의 상태
   const [newItemName, setNewItemName] = useState("");
@@ -88,8 +85,7 @@ const My: React.FC = () => {
 
   return (
     <div className="my-container">
-      {loginUser ? <Profile /> : <MemoziedLogin login={login} />}
-
+      <Profile />
       <input
         type="text"
         placeholder="Search Items"
@@ -157,5 +153,3 @@ const My: React.FC = () => {
     </div>
   );
 };
-
-export default My;
