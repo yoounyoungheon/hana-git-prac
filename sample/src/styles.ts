@@ -24,7 +24,7 @@ export const StyledNavLink = styled(NavLink)`
   }
   &:hover {
     transition: 0.5s;
-    color: green;
+    color: white;
   }
   &.active {
     color: ${appColor}; // active 클래스가 적용되었을 때의 색상

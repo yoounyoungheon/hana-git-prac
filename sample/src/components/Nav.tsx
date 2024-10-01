@@ -1,6 +1,5 @@
 // src/Nav.tsx
 import React from "react";
-import { NavLink } from "react-router-dom";
 import { StyledNavLink, UI } from "../styles";
 
 
@@ -9,23 +8,18 @@ const Nav: React.FC = () => {
     <nav>
       <UI>
         <li>
-          {" "}
-          <StyledNavLink to="/" end>Home</StyledNavLink>
-        </li>
-        <li><NavLink to="/login">Login</NavLink></li>
-        <li>
-          <NavLink
+          <StyledNavLink
             to="/my"
             style={({ isActive }) => (isActive ? { color: "red" } : {})}
           >
             My
-          </NavLink>
+          </StyledNavLink>
         </li>
         <li>
-          <NavLink to="/items">Items</NavLink>
+          <StyledNavLink to="/items">Items</StyledNavLink>
         </li>
         <li>
-          <NavLink to="/hello">About</NavLink>
+          <StyledNavLink to="/hello">About</StyledNavLink>
         </li>
       </UI>
     </nav>

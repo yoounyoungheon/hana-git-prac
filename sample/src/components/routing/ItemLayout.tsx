@@ -46,7 +46,7 @@ const ItemLayout: React.FC = () => {
 
   return (
     <ItemContext.Provider value={{ selectedItem, setSelectedItem }}>
-      <div style={{ display: "flex" }}>
+      <div className = "my-container" style={{ display: "flex" }}>
         <div style={{ flex: 1 }}>
           <h2>Items List</h2>
           <input
@@ -55,9 +55,9 @@ const ItemLayout: React.FC = () => {
             value={searchTerm}
             onChange={handleSearch}
           />
-          <ul>
+          <ul className="cart-list">
             {filteredItems.map((item) => (
-              <li key={item.id}>
+              <li className="cart-item" key={item.id}>
                 <Link
                   to={`/items/${item.id}`}
                   state={{ item }}
