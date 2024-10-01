@@ -1,5 +1,5 @@
 // src/context/SessionContext.tsx
-import React, { createContext, useContext, ReactNode, useReducer, useEffect } from "react";
+import React, { createContext, useContext, ReactNode, useReducer, useEffect, useCallback } from "react";
 import { CartItem, Session } from "../../utils/type";
 import { initialSession, sessionReducer } from "./reducer/reducer";
 
@@ -9,6 +9,7 @@ interface SessionContextType {
   logout: () => void;
   addCartItem: (name: string, price: number) => void;
   removeCartItem: (itemId: number) => void;
+  updateCartItem: (updatedItem: CartItem) => void;
 }
 
 const SessionContext = createContext<SessionContextType | undefined>(undefined);
@@ -78,10 +79,17 @@ export const SessionProvider: React.FC<{ children: ReactNode }> = ({
   const removeCartItem = (itemId: number) => {
     dispatch({ type: "removeCartItem", payload: itemId });
   };
+  
+  const updateCartItem = useCallback(
+    (updatedItem: CartItem) => {
+      dispatch({ type: "updateCartItem", payload: updatedItem });
+    },
+    [session]
+  );
 
   return (
     <SessionContext.Provider
-      value={{ session, login, logout, addCartItem, removeCartItem }}
+      value={{ session, login, logout, addCartItem, removeCartItem, updateCartItem }}
     >
       {children}
     </SessionContext.Provider>

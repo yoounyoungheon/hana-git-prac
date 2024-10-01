@@ -19,10 +19,10 @@ export const My: React.FC = () => {
 
   // 검색어 상태
   const [searchTerm, setSearchTerm] = useState("");
-  const debouncedSearchTerm  = useDebounce(searchTerm, 300);
+  const debouncedSearchTerm  = useDebounce(searchTerm, 100);
+
   // 검색된 상태 필터링
   const filterCartItems = cart.filter((item)=>item.name.includes(debouncedSearchTerm));
-
 
   const handleAddItem = () => {
     if (newItemName && newItemPrice) {
@@ -121,7 +121,7 @@ export const My: React.FC = () => {
             ) : (
               <>
                 {name} ({hour.toLocaleString()} 시간)
-                <button onClick={() => handleEditItem(id, name, hour)}>
+                <button className='button' onClick={() => handleEditItem(id, name, hour)}>
                   Edit
                 </button>
                 <button onClick={() => removeCartItem(id)}>DEL</button>

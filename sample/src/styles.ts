@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 // 전역적으로 사용할 색상 변수를 정의
-const appColor = '#FF6347'; // 예시로 사용할 색상 (토마토색)
+const appColor = '#0056b3'; // 예시로 사용할 색상 (토마토색)
 
 // ul 요소의 기본 스타일 정의
 export const UI = styled.ul`

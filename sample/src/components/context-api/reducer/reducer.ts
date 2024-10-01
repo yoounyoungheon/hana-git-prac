@@ -4,7 +4,8 @@ type ActionType =
   | { type: "login"; payload: LoginUser }
   | { type: "logout" }
   | { type: "addCartItem"; payload: CartItem }
-  | { type: "removeCartItem"; payload: number };
+  | { type: "removeCartItem"; payload: number }
+  | { type: "updateCartItem"; payload: CartItem };
 
 export const initialSession: Session ={
   loginUser: null,
@@ -28,6 +29,11 @@ export const sessionReducer = (state:Session, action:ActionType):Session=>{
         ...state,
         cart: state.cart.filter((item) => item.id !== action.payload),
       };
-    default: return initialSession;
+    case 'updateCartItem':
+      return {
+        ...state,
+        cart: state.cart.map((item)=> item.id === action.payload.id ? action.payload: item)
+      }
+    default: return state;
   }
 }
