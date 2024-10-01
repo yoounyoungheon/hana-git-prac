@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 function AnimatedBox() {
   // useRef 훅을 사용하여 Box 요소를 참조할 변수를 선언
   const boxRef = useRef<HTMLInputElement>(null);

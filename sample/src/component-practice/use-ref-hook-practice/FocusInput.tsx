@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 
 function FocusInput() {
   // useRef 훅을 사용하여 input 요소를 참조할 변수를 선언

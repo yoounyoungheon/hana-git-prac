@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 export function CountMultiplier() {
   const [count1, setCount1] = useState(1);
