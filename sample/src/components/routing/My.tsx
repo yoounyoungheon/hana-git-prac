@@ -2,10 +2,13 @@ import React, { useMemo, useState } from "react";
 import Profile from "./Profil";
 import { useSession } from "../context-api/SessionContext";
 import { useDebounce } from "../../hooks/use-debounce-hook";
+import { Login } from "./Login";
 
 export const My: React.FC = () => {
-  const { session, addCartItem, removeCartItem} = useSession();
-  const { cart } = session;
+  const { session, addCartItem, removeCartItem, login} = useSession();
+  const { cart, loginUser } = session;
+
+  const containerStyle = loginUser ? "align-right" : "align-left";
 
   // 새로운 아이템의 상태
   const [newItemName, setNewItemName] = useState("");
@@ -14,7 +17,7 @@ export const My: React.FC = () => {
   // 수정 중인 아이템의 상태
   const [editingItemId, setEditingItemId] = useState<number | null>(null);
   const [editedName, setEditedName] = useState("");
-  const [editedPrice, setEditedPrice] = useState<number | "">("");
+  const [editedHour, setEditedHour] = useState<number | "">("");
   const [hasDirty, setHasDirty] = useState(false); // 값이 변경되었는지 여부
 
   // 검색어 상태
@@ -24,6 +27,7 @@ export const My: React.FC = () => {
   // 검색된 상태 필터링
   const filterCartItems = cart.filter((item)=>item.name.includes(debouncedSearchTerm));
 
+  // 아이템 추가 핸들러 (아이템 추가 버튼을 클릭했을 때)
   const handleAddItem = () => {
     if (newItemName && newItemPrice) {
       addCartItem(newItemName, Number(newItemPrice));
@@ -33,10 +37,10 @@ export const My: React.FC = () => {
   };
 
   // 아이템 수정 핸들러 (수정 버튼을 클릭했을 때)
-  const handleEditItem = (itemId: number, name: string, price: number) => {
+  const handleEditItem = (itemId: number, name: string, hour: number) => {
     setEditingItemId(itemId); // 수정할 아이템의 ID 저장
     setEditedName(name); // 현재 이름과 가격을 편집 상태로 설정
-    setEditedPrice(price);
+    setEditedHour(hour);
   };
 
   // 아이템 업데이트 핸들러 (수정한 값을 저장할 때)
@@ -44,7 +48,7 @@ export const My: React.FC = () => {
     if (editingItemId !== null) {
       const updatedCart = cart.map((item) =>
         item.id === editingItemId
-          ? { ...item, name: editedName, price: Number(editedPrice) } // 아이템을 업데이트
+          ? { ...item, name: editedName, price: Number(editedHour) } // 아이템을 업데이트
           : item
       );
       session.cart = updatedCart; // 상태 업데이트
@@ -57,7 +61,7 @@ export const My: React.FC = () => {
   const handleCancelEdit = () => {
     setEditingItemId(null); // 수정 모드를 해제
     setEditedName(""); // 수정 값을 초기화
-    setEditedPrice("");
+    setEditedHour("");
     setHasDirty(false); // hasDirty 해제
   };
 
@@ -73,19 +77,25 @@ export const My: React.FC = () => {
 
   // totalHour 캐싱
   const totalHour: number = useMemo(()=>{
-    const prices = cart.map((obj)=>{return obj.hour})
+    const hours = cart.map((obj)=>{return obj.hour})
     let sum = 0;
-    for(const price of prices){
-      sum+=price
+    for(const hour of hours){
+      sum+=hour
     }
     return sum;
   },[cart])
 
   console.log(`total is ${totalHour}`);
+  console.log(`edited hour is ${editedHour}`);
 
   return (
-    <div className="my-container">
-      <Profile />
+    <div className ={`my-container ${containerStyle}`}>
+      {loginUser ? (
+        <Profile/>
+      ) : (
+        <Login login={login} />
+      )}
+      
       <input
         type="text"
         placeholder="Search Items"
@@ -108,9 +118,9 @@ export const My: React.FC = () => {
                 />
                 <input
                   type="number"
-                  value={editedPrice}
+                  value={editedHour}
                   onChange={(e) =>
-                    handleInputChange(setEditedPrice, e.target.value)
+                    handleInputChange(setEditedHour, e.target.value)
                   }
                 />
                 {hasDirty && (
@@ -121,7 +131,7 @@ export const My: React.FC = () => {
             ) : (
               <>
                 {name} ({hour.toLocaleString()} 시간)
-                <button className='button' onClick={() => handleEditItem(id, name, hour)}>
+                <button onClick={() => handleEditItem(id, name, hour)}>
                   Edit
                 </button>
                 <button onClick={() => removeCartItem(id)}>DEL</button>

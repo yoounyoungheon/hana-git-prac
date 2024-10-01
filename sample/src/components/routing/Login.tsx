@@ -17,7 +17,7 @@ export const Login: React.FC<LoginProps> = memo(({login})=>{
   };
   
   return(
-    <div>
+    <div className="login-container">
       <h2 className="login-title">Sign In</h2>
       <form className="login-form">
         <div className="input-group">
