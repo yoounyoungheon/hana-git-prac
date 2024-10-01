@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import Profile from "./Profil";
+import Profile from "./Profile";
 import { useSession } from "../context-api/SessionContext";
 import { useDebounce } from "../../hooks/use-debounce-hook";
 import { Login } from "./Login";

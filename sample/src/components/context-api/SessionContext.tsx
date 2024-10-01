@@ -1,6 +1,6 @@
 // src/context/SessionContext.tsx
 import React, { createContext, useContext, ReactNode, useReducer, useEffect, useCallback } from "react";
-import { CartItem, Session } from "../../utils/type";
+import { Cart, Session } from "../../utils/type";
 import { initialSession, sessionReducer } from "./reducer/reducer";
 
 interface SessionContextType {
@@ -9,11 +9,13 @@ interface SessionContextType {
   logout: () => void;
   addCartItem: (name: string, price: number) => void;
   removeCartItem: (itemId: number) => void;
-  updateCartItem: (updatedItem: CartItem) => void;
+  updateCartItem: (updatedItem: Cart) => void;
 }
 
+// 전역에서 session context 생성
 const SessionContext = createContext<SessionContextType | undefined>(undefined);
 
+// sessionContext에서 사용되는 custom hook
 export const useSession = () => {
   const context = useContext(SessionContext);
   if (!context) {
@@ -58,7 +60,6 @@ export const SessionProvider: React.FC<{ children: ReactNode }> = ({
     localStorage.setItem("cart", JSON.stringify(session.cart));
   }, [session.cart]);
 
-
   const login = (id: number, name: string) => {
     dispatch({ type: "login", payload: { id, name } });
   };
@@ -68,7 +69,7 @@ export const SessionProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   const addCartItem = (name: string, hour: number) => {
-    const newItem: CartItem = {
+    const newItem: Cart = {
       id: session.cart.length + 1,
       name,
       hour,
@@ -81,7 +82,7 @@ export const SessionProvider: React.FC<{ children: ReactNode }> = ({
   };
   
   const updateCartItem = useCallback(
-    (updatedItem: CartItem) => {
+    (updatedItem: Cart) => {
       dispatch({ type: "updateCartItem", payload: updatedItem });
     },
     [session]

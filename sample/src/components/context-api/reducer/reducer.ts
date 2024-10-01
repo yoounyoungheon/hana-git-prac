@@ -1,11 +1,11 @@
-import { Session, CartItem, LoginUser } from "../../../utils/type";
+import { Session, Cart, LoginUser } from "../../../utils/type";
 
 type ActionType =
   | { type: "login"; payload: LoginUser }
   | { type: "logout" }
-  | { type: "addCartItem"; payload: CartItem }
+  | { type: "addCartItem"; payload: Cart }
   | { type: "removeCartItem"; payload: number }
-  | { type: "updateCartItem"; payload: CartItem };
+  | { type: "updateCartItem"; payload: Cart };
 
 export const initialSession: Session ={
   loginUser: null,

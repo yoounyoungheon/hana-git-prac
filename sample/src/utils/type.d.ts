@@ -13,9 +13,3 @@ export type Session = {
   loginUser: LoginUser | null;
   cart: Cart[]; 
 };
-
-export type CartItem = {
-  id: number;
-  name: string;
-  hour: number;
-}

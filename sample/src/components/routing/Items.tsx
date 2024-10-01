@@ -2,15 +2,15 @@ import { useLocation, useNavigate, useOutletContext, useParams, } from "react-ro
 import { useSession } from "../context-api/SessionContext";
 import { useEffect, useState } from "react";
 import { ItemContextType } from "./ItemLayout";
-import { CartItem } from "../../utils/type";
+import { Cart } from "../../utils/type";
 
 export function Items(){
   const { id } = useParams<{id:string}>();
   const navigate = useNavigate();
   const location = useLocation();
-  const itemFromState = location.state?.item as CartItem | undefined;
+  const itemFromState = location.state?.item as Cart | undefined;
   const { session, updateCartItem } = useSession();
-  const [editingItem, setEditingItem] = useState<CartItem | null>(null);
+  const [editingItem, setEditingItem] = useState<Cart | null>(null);
   const context = useOutletContext<ItemContextType>(); // context 가져오기
 
   useEffect(() => {
